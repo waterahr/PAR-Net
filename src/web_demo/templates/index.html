@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Caffe demos">
+    <meta name="author" content="BVLC (http://bvlc.eecs.berkeley.edu/)">
+
+    <title>Pedestrian Attribute Demos</title>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Script to instantly classify an image once it is uploaded. -->
+    <script type="text/javascript">
+      $(document).ready(
+        function(){
+          $('#classifyfile').attr('disabled',true);
+          $('#imagefile').change(
+            function(){
+              if ($(this).val()){
+                $('#formupload').submit();
+              }
+            }
+          );
+        }
+      );
+    </script>
+
+    <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height:1.5em;
+      color: #232323;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: Times, serif;
+      line-height:1.5em;
+      border-bottom: 1px solid #ccc;
+    } 
+    .xwtable {width: 100%;border-collapse: collapse;border: 1px solid #ccc;}
+    .xwtable thead td {font-size: 12px;color: #333333;text-align: center;background: url(./template/table_top.jpg) repeat-x top center;border: 1px solid #ccc; font-weight:bold;}  
+    .xwtable tbody tr {background: #fff;font-size: 12px;color: #666666;overflow-x: scroll;}             
+    .xwtable tbody tr.alt-row {background: #f2f7fc;}                 
+    .xwtable td{line-height:20px;text-align: center;padding:4px 10px 3px 10px;height: 18px;border: 1px solid #ccc;}    
+    </style>
+  </head>
+
+  <body>
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1><a href="/">Pedestrian Attribute Demos</a></h1>
+        <!--
+        <p>
+          The state-of-the-art results.<a href="/classify_metrics">Click for a PETA testing.</a><a href="/attributes_metrics">Click for attributes' testing.</a>
+        </p>-->
+          <table class="xwtable">  
+            <thead>  
+              <tr>  
+                <td rowspan="2">Method</td>
+                <td colspan="5">PETA</td>
+                <td colspan="5">RAP</td>
+              </tr>
+              <tr>
+                <td>mA(%)</td>
+                <td>Accuracy(%)</td>
+                <td>Precision(%)</td> 
+                <td>Recall(%)</td> 
+                <td>F1-score(%)</td> 
+                <td>mA(%)</td>
+                <td>Accuracy(%)</td>
+                <td>Precision(%)</td> 
+                <td>Recall(%)</td> 
+                <td>F1-score(%)</td> 
+              </tr>
+            </thead>
+            <tbody>  
+                <tr> <td>ACN </td> <td> 81.15 </td> <td> 73.66 </td> <td> 84.06 </td> <td> 81.26 </td> <td> 82.64 </td> <td> 69.66 </td> <td> 62.61 </td> <td> <b>80.12</b> </td> <td> 72.26 </td> <td> 75.98</td> </tr>
+                <tr> <td>DeepMar </td> <td> 82.89 </td> <td> 75.07 </td> <td> 83.68 </td> <td> 83.14 </td> <td> 83.41 </td> <td> 73.79 </td> <td> 62.02 </td> <td> 74.92 </td> <td> 76.21 </td> <td> 75.56</td> </tr>
+                <tr> <td>SRN(<i>/L<sub>b</sub></i>) </td> <td> 80.55 </td> <td> 74.24 </td> <td> 84.04 </td> <td> 82.48 </td> <td> 83.25 </td> <td> - </td> <td> - </td> <td> - </td> <td> - </td> <td> -</td> </tr>
+                <tr> <td>SRN(<i>/L<sub>w</sub></i>) </td> <td> 82.36 </td> <td> 75.69 </td> <td> 85.25 </td> <td> 84.59 </td> <td> 84.92 </td> <td> - </td> <td> - </td> <td> - </td> <td> - </td> <td> -</td> </tr>
+                <tr> <td>VeSPA </td> <td> 83.45 </td> <td> 77.73 </td> <td> 86.18 </td> <td> 84.81 </td> <td> 85.49 </td> <td> 77.70 </td> <td> <b>67.35</b> </td> <td> 79.51 </td> <td> <b>79.67</b> </td> <td> <b>79.59</b></td> </tr>
+                <tr> <td>WPAL-GMP </td> <td> <b>85.50</b> </td> <td> 76.98 </td> <td> 84.07 </td> <td> 85.78 </td> <td> 84.90 </td> <td> <b>81.25</b> </td> <td> 50.30 </td> <td> 57.17 </td> <td> 78.39 </td> <td> 66.12</td> </tr>
+                <tr> <td>WPAL-FSPP </td> <td> 84.16 </td> <td> 74.62 </td> <td> 82.66 </td> <td> 85.16 </td> <td> 83.40 </td> <td> 79.48 </td> <td> 53.30 </td> <td> 60.82 </td> <td> 78.80 </td> <td> 68.65</td> </tr>
+                <tr> <td>VAA-ResNet </td> <td> 84.59 </td> <td> <b>78.56</b> </td> <td> <b>86.79</b> </td> <td> <b>86.12</b> </td> <td> <b>86.48</b> </td> <td> - </td> <td> - </td> <td> - </td> <td> - </td> <td> -</td> </tr>
+                <tr> <td>GoogLeNet baseline </td> <td> 79.67 </td> <td> 75.63 </td> <td> 85.32 </td> <td> 82.65 </td> <td> 83.97 </td> <td> 69.11 </td> <td> 58.82 </td> <td> 74.77 </td> <td> 70.96 </td> <td> 72.80</td> </tr>
+                <tr> <td> High-level-Semantic-guided GoogLeNet </td> <td> <b>96.23</b> </td> <td> <b>96.39</b> </td> <td> <b>97.32</b> </td> <td> <b>98.01</b> </td> <td> <b>97.66</b> </td> <td> <b>86.17</b> </td> <td> 50.98 </td> <td> 55.95 </td> <td> <b>83.71</b> </td> <td> 67.07</td> </tr>
+
+
+              <!--<tr>  
+                <td>WPAL-GMP</td>  
+                <td>85.50</td>
+                <td>76.98</td>
+                <td>84.07</td> 
+                <td>85.78</td> 
+                <td>84.90</td>
+              </tr>
+              <tr>  
+                <td>WPAL-FSPP</td>  
+                <td>84.16</td>
+                <td>74.62</td>
+                <td>82.66</td> 
+                <td>85.16</td> 
+                <td>83.40</td>
+              </tr>  
+              <tr>  
+                <td>VeSPA</td>  
+                <td>83.45</td>
+                <td>77.73</td>
+                <td>86.18</td> 
+                <td>84.81</td> 
+                <td>85.49</td>
+              </tr>-->
+              <!--{% if has_metrics %}
+              <tr>  
+                <td>ours</td>  
+                <td>{{ metrics[0] }}</td>
+                <td>{{ metrics[1] }}</td>
+                <td>{{ metrics[2] }}</td> 
+                <td>{{ metrics[3] }}</td> 
+                <td>{{ metrics[4] }}</td>
+              </tr>
+              {% endif %}-->
+            </tbody>  
+          </table>
+         {% if has_metrics %}
+        <p>
+          Tesing successfully on the PETA dataset, totally ~7600 pictures, taking {{ metrics[5] }} seconds.
+        </p>
+         {% endif %}
+      </div>
+
+       {% if has_attributes %}
+      <div>
+        <h2>Attributes</h2>
+        <div style="overflow:scroll;">
+            <table class="xwtable">
+                <thead>  
+                  <tr>
+                    {% for attr_name in attributes[0] %}
+                    <td>{{ attr_name }}</td>  
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>  
+                  <tr>  
+                    {% for attr_val in attributes[1] %}
+                    <td>{{ attr_val }}</td>  
+                    {% endfor %} 
+                  </tr>
+                 </tbody>
+            </table>
+        </div>
+      </div>
+        {% endif %}
+
+        
+        
+      <div>
+        <h2>Classification</h2>
+          </div>
+      {% if has_result %}
+      {% if not result[0] %}
+      <div class="alert alert-danger">{{ result[1] }} Did you provide a valid URL or a valid image file? </div>
+      {% else %}
+      <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" width="192" height="400" src= {{ imagesrc }}></a>
+        <div class="media-body">
+          <div class="bs-example bs-example-tabs">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#infopred" data-toggle="tab">GoogLeNet</a></li>
+              <li><a href="#flatpred" data-toggle="tab">High-level-Semantic-guided GoogLeNet</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade in active" id="infopred">
+                <ul class="list-group">
+                  {% for single_pred in result[1] %}
+                  <li class="list-group-item">
+                  <span class="badge">{{ single_pred[1] }}</span>
+                  <h4 class="list-group-item-heading">
+                    <a href="https://www.google.com/#q={{ single_pred[0] }}" target="_blank">{{ single_pred[0] }}</a>
+                  </h4>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+                
+
+              <div class="tab-pane fade" id="flatpred">
+                <ul class="list-group">
+                  {% for single_pred in result[2] %}
+                  <li class="list-group-item">
+                  <span class="badge">{{ single_pred[1] }}</span>
+                  <h4 class="list-group-item-heading">
+                    <a href="https://www.google.com/#q={{ single_pred[0] }}" target="_blank">{{ single_pred[0] }}</a>
+                  </h4>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+                
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <p> CNN took {{ result[3] }} seconds. </p>
+      {% endif %}
+      <hr>
+      {% endif %}
+
+      <!--<<form role="form" action="classify_url" method="get">
+        <div class="form-group">
+          <div class="input-group">
+            input type="text" class="form-control" name="imageurl" id="imageurl" placeholder="Provide an image URL">
+            <span class="input-group-btn">
+              <input class="btn btn-primary" value="Classify URL" type="submit" id="classifyurl">
+            </span>
+          </div>
+        </div>
+      </form>-->
+
+      <form id="formupload" class="form-inline" role="form" action="classify_upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <!--<label for="imagefile">Or upload an image:</label>-->
+          <input type="file" name="imagefile" id="imagefile">
+        </div>
+        <div>
+          <input type="submit" class="btn btn-primary" value="Classify File" id=""classifyfile>
+        </div>
+      </form>
+    </div>
+
+
+
+
+    <hr>
+    <div id="footer">
+      <div class="container">
+        <p>&copy; DML 2019</p>
+      </div>
+    </div>
+  </body>
+</html>
